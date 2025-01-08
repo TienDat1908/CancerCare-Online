@@ -73,6 +73,8 @@ class User < ApplicationRecord
     validates :role, inclusion: { in: %w[patient doctor] }
   end
 
+  after_update :create_role_specific_record, if: :saved_change_to_role?
+
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
                                     parent.table[:first_name], Arel::Nodes.build_quoted(' ')).concat(parent.table[:last_name])
@@ -90,5 +92,14 @@ class User < ApplicationRecord
 
   def set_default_admin_user
     self.admin_user ||= AdminUser.first
+  end
+
+  def create_role_specific_record
+    case role
+    when 'patient'
+      create_patient unless patient
+    when 'doctor'
+      create_doctor unless doctor
+    end
   end
 end
