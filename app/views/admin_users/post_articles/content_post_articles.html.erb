@@ -1,10 +1,10 @@
-<div class="flex items-center bg-white shadow-lg rounded-xl p-6">
-  <%= link_to admin_users_post_articles_path do %>
+<div class="bg-white shadow-lg rounded-xl p-6">
+  <%= link_to admin_users_post_articles_path, class: "flex items-center" do %>
     <i class="fas fa-arrow-left text-2xl"></i>
+    <div class="text-[40px] font-bold ml-3">
+      No.<%= @post_articles.id %>
+    </div>
   <% end %>
-  <div class="text-[40px] font-bold ml-3">
-    No.<%= @post_articles.id %>
-  </div>
 </div>
 <div class="flex items-center justify-between bg-white shadow-lg rounded-xl p-6 mt-5">
   <div class="text-[25px] font-bold">Created:</div>

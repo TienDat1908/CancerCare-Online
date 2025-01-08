@@ -1,16 +1,16 @@
-<div class="flex items-center bg-white shadow-lg rounded-xl p-6">
-  <%= link_to admin_users_feedbacks_path do %>
+<div class="bg-white shadow-lg rounded-xl p-6">
+  <%= link_to admin_users_feedbacks_path, class: "flex items-center" do %>
     <i class="fas fa-arrow-left text-2xl"></i>
+    <div class="text-[40px] font-bold ml-3">
+      No.<%= @feedback.id %>
+    </div>
   <% end %>
-  <div class="text-[40px] font-bold ml-3">
-    No.<%= @feedback.id %>
-  </div>
 </div>
 <div class="bg-white shadow-lg rounded-xl p-6 mt-5 text-[25px] font-bold">
-  TITLE:<br><span class="font-normal"><%= @feedback.title %></span>
+  TITLE:<br><span class="text-[18px] font-normal"><%= @feedback.title %></span>
 </div>
 <div class="bg-white shadow-lg rounded-xl p-6 mt-5 text-[25px] font-bold">
-  DESCRIPTION:<br><span class="font-normal"><%= @feedback.description %></span>
+  DESCRIPTION:<br><span class="text-[18px] font-normal"><%= @feedback.description %></span>
 </div>
 <% if @feedback.images.attached? %>
   <div class="bg-white shadow-lg rounded-xl p-6 mt-5 text-[25px] font-bold">

@@ -18,6 +18,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :string
 #  sign_in_count          :integer          default(0), not null
 #  status                 :boolean          default(FALSE)
 #  created_at             :datetime         not null

@@ -18,6 +18,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :string
 #  sign_in_count          :integer          default(0), not null
 #  status                 :boolean          default(FALSE)
 #  created_at             :datetime         not null
@@ -57,6 +58,8 @@ class User < ApplicationRecord
   delegate :city, :state, :zip, :street, :country, to: :primary_address, allow_nil: true
 
   enum gender: { male: 'male', female: 'female' }
+
+  enum role: { patient: 'patient', doctor: 'doctor' }
 
   with_options on: :update_profile do
     validates :first_name, presence: true
