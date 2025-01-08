@@ -69,7 +69,8 @@ class Api::V1::AuthController < ApplicationApiController
       :avatar,
       :nick_name,
       :date_of_birth,
-      :gender
+      :gender,
+      :role
     )
   end
 

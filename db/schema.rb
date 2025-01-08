@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_08_101508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "doctors", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "description"
+    t.integer "experience"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_doctors_on_user_id"
+  end
+
   create_table "feedbacks", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -74,6 +83,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date_of_birth"
+    t.string "gender"
+    t.string "blood_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "post_articles", force: :cascade do |t|
@@ -116,7 +135,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "doctors", "users"
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "patients", "users"
   add_foreign_key "post_articles", "users"
   add_foreign_key "users", "admin_users"
 end

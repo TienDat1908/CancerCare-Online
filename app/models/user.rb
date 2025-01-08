@@ -50,6 +50,8 @@ class User < ApplicationRecord
   has_many :feedbacks, dependent: :destroy
 
   has_one :primary_address, -> { where(primary_address: true) }, foreign_key: :user_id, class_name: 'Address'
+  has_one :patient, dependent: :destroy
+  has_one :doctor, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
@@ -68,6 +70,7 @@ class User < ApplicationRecord
     validates :gender, inclusion: { in: %w[male female] }
     validates :phone_number, presence: true
     validates :nick_name, presence: true
+    validates :role, inclusion: { in: %w[patient doctor] }
   end
 
   ransacker :full_name do |parent|
@@ -80,7 +83,7 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[id email phone_number full_name]
+    %w[id email phone_number full_name role]
   end
 
   private
