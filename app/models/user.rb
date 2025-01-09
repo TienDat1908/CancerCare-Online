@@ -6,6 +6,7 @@
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :inet
 #  date_of_birth          :date
+#  date_of_diagnosis      :datetime
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
@@ -20,6 +21,7 @@
 #  reset_password_token   :string
 #  role                   :string
 #  sign_in_count          :integer          default(0), not null
+#  specialization         :string
 #  status                 :boolean          default(FALSE)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -48,6 +50,8 @@ class User < ApplicationRecord
   has_many :post_articles
   has_many :addresses, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
+  has_many :medical_records, dependent: :destroy
+  has_many :created_medical_records, class_name: 'MedicalRecord', foreign_key: :created_by_user_id, dependent: :nullify
 
   has_one :primary_address, -> { where(primary_address: true) }, foreign_key: :user_id, class_name: 'Address'
 

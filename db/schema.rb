@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_09_031933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,54 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "cancer_risk_factors", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cancer_risk_factors_cancers", id: false, force: :cascade do |t|
+    t.bigint "cancer_id", null: false
+    t.bigint "cancer_risk_factor_id", null: false
+    t.index ["cancer_id", "cancer_risk_factor_id"], name: "idx_on_cancer_id_cancer_risk_factor_id_fc021ef85d"
+    t.index ["cancer_risk_factor_id", "cancer_id"], name: "idx_on_cancer_risk_factor_id_cancer_id_602dbca588"
+  end
+
+  create_table "cancer_stages", force: :cascade do |t|
+    t.bigint "cancer_id", null: false
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cancer_id"], name: "index_cancer_stages_on_cancer_id"
+  end
+
+  create_table "cancers", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_cancers_on_name", unique: true
+  end
+
+  create_table "cancers_symptoms", id: false, force: :cascade do |t|
+    t.bigint "cancer_id", null: false
+    t.bigint "symptom_id", null: false
+    t.index ["cancer_id", "symptom_id"], name: "index_cancers_symptoms_on_cancer_id_and_symptom_id"
+    t.index ["symptom_id", "cancer_id"], name: "index_cancers_symptoms_on_symptom_id_and_cancer_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.bigint "medical_record_id", null: false
+    t.string "file_path"
+    t.string "file_name"
+    t.string "file_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medical_record_id"], name: "index_documents_on_medical_record_id"
+  end
+
   create_table "feedbacks", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -74,6 +122,21 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
+
+  create_table "medical_records", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "created_by_user_id", null: false
+    t.bigint "cancer_id", null: false
+    t.bigint "cancer_stage_id", null: false
+    t.text "diagnosis"
+    t.text "treatment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cancer_id"], name: "index_medical_records_on_cancer_id"
+    t.index ["cancer_stage_id"], name: "index_medical_records_on_cancer_stage_id"
+    t.index ["created_by_user_id"], name: "index_medical_records_on_created_by_user_id"
+    t.index ["user_id"], name: "index_medical_records_on_user_id"
   end
 
   create_table "post_articles", force: :cascade do |t|
@@ -84,6 +147,30 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
     t.datetime "updated_at", null: false
     t.datetime "previous_updated_at"
     t.index ["user_id"], name: "index_post_articles_on_user_id"
+  end
+
+  create_table "prescriptions", force: :cascade do |t|
+    t.bigint "medical_record_id", null: false
+    t.string "medication"
+    t.string "dosage"
+    t.text "instructions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medical_record_id"], name: "index_prescriptions_on_medical_record_id"
+  end
+
+  create_table "symptoms", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "treatments", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,6 +195,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
     t.string "gender"
     t.bigint "admin_user_id", null: false
     t.string "role"
+    t.datetime "date_of_diagnosis"
+    t.string "specialization"
     t.index ["admin_user_id"], name: "index_users_on_admin_user_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -116,7 +205,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_092730) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "cancer_stages", "cancers"
+  add_foreign_key "documents", "medical_records"
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "medical_records", "cancer_stages"
+  add_foreign_key "medical_records", "cancers"
+  add_foreign_key "medical_records", "users"
+  add_foreign_key "medical_records", "users", column: "created_by_user_id"
   add_foreign_key "post_articles", "users"
+  add_foreign_key "prescriptions", "medical_records"
   add_foreign_key "users", "admin_users"
 end
