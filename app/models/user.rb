@@ -50,8 +50,6 @@ class User < ApplicationRecord
   has_many :feedbacks, dependent: :destroy
 
   has_one :primary_address, -> { where(primary_address: true) }, foreign_key: :user_id, class_name: 'Address'
-  has_one :patient, dependent: :destroy
-  has_one :doctor, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
@@ -73,8 +71,6 @@ class User < ApplicationRecord
     validates :role, inclusion: { in: %w[patient doctor] }
   end
 
-  after_update :create_role_specific_record, if: :saved_change_to_role?
-
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
                                     parent.table[:first_name], Arel::Nodes.build_quoted(' ')).concat(parent.table[:last_name])
@@ -92,14 +88,5 @@ class User < ApplicationRecord
 
   def set_default_admin_user
     self.admin_user ||= AdminUser.first
-  end
-
-  def create_role_specific_record
-    case role
-    when 'patient'
-      create_patient unless patient
-    when 'doctor'
-      create_doctor unless doctor
-    end
   end
 end
