@@ -2,7 +2,7 @@ class Api::V1::AuthController < ApplicationApiController
   skip_before_action :authorize_request, only: %i[login signup]
 
   def login
-    user = User.find_by(email: params[:email])
+    user = User.find_by_login(params[:login])
 
     if user&.valid_password?(params[:password])
       user.update_columns(current_sign_in_at: Time.current, last_sign_in_at: user.current_sign_in_at, status: true)
@@ -10,7 +10,7 @@ class Api::V1::AuthController < ApplicationApiController
       token = encode_token(user)
       render json: { token: token, user_id: user.id }, status: :ok
     else
-      render json: { error: 'Invalid email or password' }, status: :unauthorized
+      render json: { error: 'Invalid username/email or password' }, status: :unauthorized
     end
   end
 
@@ -57,7 +57,8 @@ class Api::V1::AuthController < ApplicationApiController
     params.require(:user).permit(
       :email,
       :password,
-      :password_confirmation
+      :password_confirmation,
+      :username
     )
   end
 
