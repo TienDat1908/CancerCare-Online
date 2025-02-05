@@ -190,7 +190,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_09_031933) do
     t.string "phone_number"
     t.string "first_name"
     t.string "last_name"
-    t.string "nick_name"
     t.date "date_of_birth"
     t.string "gender"
     t.bigint "admin_user_id", null: false

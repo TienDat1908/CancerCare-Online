@@ -70,7 +70,9 @@ class Api::V1::AuthController < ApplicationApiController
       :nick_name,
       :date_of_birth,
       :gender,
-      :role
+      :role,
+      :specialization,
+      :date_of_diagnosis
     )
   end
 

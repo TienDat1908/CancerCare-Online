@@ -14,7 +14,6 @@
 #  last_name              :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
-#  nick_name              :string
 #  phone_number           :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime

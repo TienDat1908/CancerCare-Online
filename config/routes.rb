@@ -22,7 +22,6 @@ Rails.application.routes.draw do
         get :content_post_articles
       end
     end
-    resources :profile_admin_users
     resources :feedbacks do
       member do
         get :content_feedback

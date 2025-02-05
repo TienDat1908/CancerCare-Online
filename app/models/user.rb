@@ -14,7 +14,6 @@
 #  last_name              :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
-#  nick_name              :string
 #  phone_number           :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -71,7 +70,6 @@ class User < ApplicationRecord
     validates :date_of_birth, presence: true
     validates :gender, inclusion: { in: %w[male female] }
     validates :phone_number, presence: true
-    validates :nick_name, presence: true
     validates :role, inclusion: { in: %w[patient doctor] }
   end
 
