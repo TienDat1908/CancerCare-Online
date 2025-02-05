@@ -73,6 +73,7 @@ class User < ApplicationRecord
     validates :gender, inclusion: { in: %w[male female] }
     validates :phone_number, presence: true
     validates :role, inclusion: { in: %w[patient doctor] }
+    validates :username, presence: true
   end
 
   ransacker :full_name do |parent|

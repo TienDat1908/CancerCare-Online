@@ -57,8 +57,7 @@ class Api::V1::AuthController < ApplicationApiController
     params.require(:user).permit(
       :email,
       :password,
-      :password_confirmation,
-      :username
+      :password_confirmation
     )
   end
 
@@ -73,7 +72,8 @@ class Api::V1::AuthController < ApplicationApiController
       :gender,
       :role,
       :specialization,
-      :date_of_diagnosis
+      :date_of_diagnosis,
+      :username
     )
   end
 
