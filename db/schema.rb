@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_05_072001) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_14_093725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -133,10 +133,25 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_05_072001) do
     t.text "treatment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "diagnosis_date"
+    t.datetime "treatment_start_date"
+    t.datetime "treatment_end_date"
+    t.string "status"
+    t.string "notes"
+    t.bigint "organization_id"
     t.index ["cancer_id"], name: "index_medical_records_on_cancer_id"
     t.index ["cancer_stage_id"], name: "index_medical_records_on_cancer_stage_id"
     t.index ["created_by_user_id"], name: "index_medical_records_on_created_by_user_id"
+    t.index ["organization_id"], name: "index_medical_records_on_organization_id"
     t.index ["user_id"], name: "index_medical_records_on_user_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "post_articles", force: :cascade do |t|
@@ -156,7 +171,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_05_072001) do
     t.text "instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "frequency"
+    t.text "side_effects"
+    t.boolean "is_completed"
+    t.bigint "prescribed_by", null: false
     t.index ["medical_record_id"], name: "index_prescriptions_on_medical_record_id"
+    t.index ["prescribed_by"], name: "index_prescriptions_on_prescribed_by"
   end
 
   create_table "symptoms", force: :cascade do |t|
@@ -197,8 +219,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_05_072001) do
     t.datetime "date_of_diagnosis"
     t.string "specialization"
     t.string "username"
+    t.bigint "organization_id"
     t.index ["admin_user_id"], name: "index_users_on_admin_user_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -215,5 +239,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_05_072001) do
   add_foreign_key "medical_records", "users", column: "created_by_user_id"
   add_foreign_key "post_articles", "users"
   add_foreign_key "prescriptions", "medical_records"
+  add_foreign_key "prescriptions", "users", column: "prescribed_by"
   add_foreign_key "users", "admin_users"
 end
