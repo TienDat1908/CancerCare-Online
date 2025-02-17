@@ -1,3 +1,8 @@
+class CancerStage < ApplicationRecord
+  belongs_to :cancer
+  has_many :medical_records, dependent: :destroy
+end
+
 # == Schema Information
 #
 # Table name: cancer_stages
@@ -17,7 +22,3 @@
 #
 #  fk_rails_...  (cancer_id => cancers.id)
 #
-class CancerStage < ApplicationRecord
-  belongs_to :cancer
-  has_many :medical_records, dependent: :destroy
-end

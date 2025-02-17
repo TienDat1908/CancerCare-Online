@@ -1,3 +1,8 @@
+class Organization < ApplicationRecord
+  has_many :users
+  has_many :medical_records
+end
+
 # == Schema Information
 #
 # Table name: organizations
@@ -9,7 +14,3 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
-class Organization < ApplicationRecord
-  has_many :users
-  has_many :medical_records
-end

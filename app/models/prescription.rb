@@ -1,3 +1,8 @@
+class Prescription < ApplicationRecord
+  belongs_to :medical_record
+  belongs_to :user, foreign_key: :prescribed_by
+end
+
 # == Schema Information
 #
 # Table name: prescriptions
@@ -26,7 +31,3 @@
 #  fk_rails_...  (medical_record_id => medical_records.id)
 #  fk_rails_...  (prescribed_by => users.id)
 #
-class Prescription < ApplicationRecord
-  belongs_to :medical_record
-  belongs_to :user, foreign_key: :prescribed_by
-end

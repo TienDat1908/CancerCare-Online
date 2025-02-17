@@ -1,3 +1,7 @@
+class CancerRiskFactor < ApplicationRecord
+  has_and_belongs_to_many :cancers
+end
+
 # == Schema Information
 #
 # Table name: cancer_risk_factors
@@ -8,6 +12,3 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-class CancerRiskFactor < ApplicationRecord
-  has_and_belongs_to_many :cancers
-end

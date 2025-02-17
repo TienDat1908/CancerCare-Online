@@ -1,3 +1,7 @@
+class Document < ApplicationRecord
+  belongs_to :medical_record
+end
+
 # == Schema Information
 #
 # Table name: documents
@@ -18,6 +22,3 @@
 #
 #  fk_rails_...  (medical_record_id => medical_records.id)
 #
-class Document < ApplicationRecord
-  belongs_to :medical_record
-end

@@ -1,3 +1,21 @@
+class Address < ApplicationRecord
+  belongs_to :user
+
+  validates :city, :country, :state, :street, :zip, presence: true
+
+  scope :exclude_current, ->(address_id) { where.not(id: address_id) }
+
+  before_create :set_primary_address
+
+  private
+
+  def set_primary_address
+    if user.addresses.count == 0
+      self.primary_address = true
+    end
+  end
+end
+
 # == Schema Information
 #
 # Table name: addresses
@@ -21,20 +39,3 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Address < ApplicationRecord
-  belongs_to :user
-
-  validates :city, :country, :state, :street, :zip, presence: true
-
-  scope :exclude_current, ->(address_id) { where.not(id: address_id) }
-
-  before_create :set_primary_address
-
-  private
-
-  def set_primary_address
-    if user.addresses.count == 0
-      self.primary_address = true
-    end
-  end
-end

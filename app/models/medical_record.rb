@@ -1,3 +1,17 @@
+class MedicalRecord < ApplicationRecord
+  belongs_to :user
+  belongs_to :created_by_user, class_name: 'User'
+  belongs_to :cancer
+  belongs_to :cancer_stage
+  has_many :prescriptions, dependent: :destroy
+  has_many :documents, dependent: :destroy
+
+  enum status: { active: 'active',
+                 recovered: 'recovered',
+                 deceased: 'deceased',
+                 in_remission: 'in_remission' }
+end
+
 # == Schema Information
 #
 # Table name: medical_records
@@ -31,16 +45,3 @@
 #  fk_rails_...  (created_by_user_id => users.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class MedicalRecord < ApplicationRecord
-  belongs_to :user
-  belongs_to :created_by_user, class_name: 'User'
-  belongs_to :cancer
-  belongs_to :cancer_stage
-  has_many :prescriptions, dependent: :destroy
-  has_many :documents, dependent: :destroy
-
-  enum status: { active: 'active',
-                 recovered: 'recovered',
-                 deceased: 'deceased',
-                 in_remission: 'in_remission' }
-end
