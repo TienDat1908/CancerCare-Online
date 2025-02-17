@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::AuthController < ApplicationApiController
   skip_before_action :authorize_request, only: %i[login signup]
 

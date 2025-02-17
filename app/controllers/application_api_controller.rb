@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationApiController < ActionController::API
   before_action :authorize_request
 
@@ -5,7 +7,7 @@ class ApplicationApiController < ActionController::API
 
   def authorize_request
     header = request.headers['Authorization']
-    return render json: { error: 'Authorization token missing' }, status: :unauthorized unless header.present?
+    return render json: { error: 'Authorization token missing' }, status: :unauthorized if header.blank?
 
     token = header.split(' ').last
     begin

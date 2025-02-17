@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminUsers
   class FeedbacksController < ApplicationController
     before_action :authenticate_admin_user!
