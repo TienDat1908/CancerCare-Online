@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_14_093725) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -138,11 +138,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093725) do
     t.datetime "treatment_end_date"
     t.string "status"
     t.string "notes"
-    t.bigint "organization_id"
     t.index ["cancer_id"], name: "index_medical_records_on_cancer_id"
     t.index ["cancer_stage_id"], name: "index_medical_records_on_cancer_stage_id"
     t.index ["created_by_user_id"], name: "index_medical_records_on_created_by_user_id"
-    t.index ["organization_id"], name: "index_medical_records_on_organization_id"
     t.index ["user_id"], name: "index_medical_records_on_user_id"
   end
 
@@ -241,4 +239,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093725) do
   add_foreign_key "prescriptions", "medical_records"
   add_foreign_key "prescriptions", "users", column: "prescribed_by"
   add_foreign_key "users", "admin_users"
+  add_foreign_key "users", "organizations"
 end

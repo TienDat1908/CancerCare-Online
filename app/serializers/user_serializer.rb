@@ -39,6 +39,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (admin_user_id => admin_users.id)
+#  fk_rails_...  (organization_id => organizations.id)
 #
 class UserSerializer < ActiveModel::Serializer
   attributes :id,

@@ -15,7 +15,6 @@
 #  cancer_id            :bigint           not null
 #  cancer_stage_id      :bigint           not null
 #  created_by_user_id   :bigint           not null
-#  organization_id      :bigint
 #  user_id              :bigint           not null
 #
 # Indexes
@@ -23,7 +22,6 @@
 #  index_medical_records_on_cancer_id           (cancer_id)
 #  index_medical_records_on_cancer_stage_id     (cancer_stage_id)
 #  index_medical_records_on_created_by_user_id  (created_by_user_id)
-#  index_medical_records_on_organization_id     (organization_id)
 #  index_medical_records_on_user_id             (user_id)
 #
 # Foreign Keys
@@ -34,5 +32,19 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class MedicalRecordSerializer < ActiveModel::Serializer
-  attributes :id, :diagnosis, :treatment, :cancer_id, :cancer_stage_id, :created_by_user_id, :created_at, :updated_at
+  attributes :id,
+             :diagnosis,
+             :treatment,
+             :notes,
+             :status,
+             :cancer_id,
+             :cancer_stage_id,
+             :created_by_user_id,
+             :user_id,
+             :organization_id,
+             :diagnosis_date,
+             :treatment_start_date,
+             :treatment_end_date,
+             :created_at,
+             :updated_at
 end

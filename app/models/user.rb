@@ -39,6 +39,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (admin_user_id => admin_users.id)
+#  fk_rails_...  (organization_id => organizations.id)
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -49,7 +50,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   belongs_to :admin_user
-  belongs_to :organization
+  belongs_to :organization, optional: true
 
   has_many :post_articles
   has_many :addresses, dependent: :destroy
