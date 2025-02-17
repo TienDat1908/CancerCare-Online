@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostArticle < ApplicationRecord
   belongs_to :user
 

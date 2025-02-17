@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MedicalRecordSerializer < ActiveModel::Serializer
   attributes :id,
              :diagnosis,

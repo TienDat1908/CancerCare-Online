@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cancer < ApplicationRecord
   has_many :cancer_stages, dependent: :destroy
   has_many :medical_records, dependent: :destroy

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Address < ApplicationRecord
   belongs_to :user
 
@@ -10,9 +12,9 @@ class Address < ApplicationRecord
   private
 
   def set_primary_address
-    if user.addresses.count == 0
-      self.primary_address = true
-    end
+    return unless user.addresses.count.zero?
+
+    self.primary_address = true
   end
 end
 

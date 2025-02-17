@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FeedbackSerializer < ActiveModel::Serializer
   attributes :id, :title, :description, :images_url, :user_id, :created_at, :updated_at
 

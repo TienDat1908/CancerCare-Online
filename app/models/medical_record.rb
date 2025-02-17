@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MedicalRecord < ApplicationRecord
   belongs_to :user
   belongs_to :created_by_user, class_name: 'User'
