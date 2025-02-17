@@ -2,7 +2,6 @@
 
 class Organization < ApplicationRecord
   has_many :users
-  has_many :medical_records
 end
 
 # == Schema Information

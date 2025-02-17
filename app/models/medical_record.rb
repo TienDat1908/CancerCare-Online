@@ -8,10 +8,10 @@ class MedicalRecord < ApplicationRecord
   has_many :prescriptions, dependent: :destroy
   has_many :documents, dependent: :destroy
 
-  enum status: { active: 'active',
-                 recovered: 'recovered',
-                 deceased: 'deceased',
-                 in_remission: 'in_remission' }
+  enum :status, { active: 'active',
+                  recovered: 'recovered',
+                  deceased: 'deceased',
+                  in_remission: 'in_remission' }
 end
 
 # == Schema Information

@@ -25,9 +25,9 @@ class User < ApplicationRecord
 
   delegate :city, :state, :zip, :street, :country, to: :primary_address, allow_nil: true
 
-  enum gender: { male: 'male', female: 'female' }
+  enum :gender, { male: 'male', female: 'female' }
 
-  enum role: { patient: 'patient', doctor: 'doctor' }
+  enum :role, { patient: 'patient', doctor: 'doctor' }
 
   with_options on: :update_profile do
     validates :first_name, presence: true
