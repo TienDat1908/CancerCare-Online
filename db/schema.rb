@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_18_065759) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,13 +72,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "cancer_risk_factors_cancers", id: false, force: :cascade do |t|
-    t.bigint "cancer_id", null: false
-    t.bigint "cancer_risk_factor_id", null: false
-    t.index ["cancer_id", "cancer_risk_factor_id"], name: "idx_on_cancer_id_cancer_risk_factor_id_fc021ef85d"
-    t.index ["cancer_risk_factor_id", "cancer_id"], name: "idx_on_cancer_risk_factor_id_cancer_id_602dbca588"
+    t.bigint "cancer_id"
   end
 
   create_table "cancer_stages", force: :cascade do |t|
@@ -128,7 +122,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
     t.bigint "user_id", null: false
     t.bigint "created_by_user_id", null: false
     t.bigint "cancer_id", null: false
-    t.bigint "cancer_stage_id", null: false
     t.text "diagnosis"
     t.text "treatment"
     t.datetime "created_at", null: false
@@ -139,7 +132,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
     t.string "status"
     t.string "notes"
     t.index ["cancer_id"], name: "index_medical_records_on_cancer_id"
-    t.index ["cancer_stage_id"], name: "index_medical_records_on_cancer_stage_id"
     t.index ["created_by_user_id"], name: "index_medical_records_on_created_by_user_id"
     t.index ["user_id"], name: "index_medical_records_on_user_id"
   end
@@ -184,6 +176,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cancer_id"
   end
 
   create_table "treatments", force: :cascade do |t|
@@ -191,6 +184,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cancer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -231,7 +225,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_093404) do
   add_foreign_key "cancer_stages", "cancers"
   add_foreign_key "documents", "medical_records"
   add_foreign_key "feedbacks", "users"
-  add_foreign_key "medical_records", "cancer_stages"
   add_foreign_key "medical_records", "cancers"
   add_foreign_key "medical_records", "users"
   add_foreign_key "medical_records", "users", column: "created_by_user_id"

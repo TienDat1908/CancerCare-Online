@@ -2,7 +2,6 @@
 
 class CancerStage < ApplicationRecord
   belongs_to :cancer
-  has_many :medical_records, dependent: :destroy
 end
 
 # == Schema Information

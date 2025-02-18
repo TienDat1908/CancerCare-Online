@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   # Namespace cho admin_users
   namespace :admin_users do
     resources :dashboard
-    resources :users, only: %i[index destroy] do
+    resources :feedbacks do
       member do
-        get :profile_user
+        get :content_feedback
       end
     end
     resources :post_articles do
@@ -22,15 +22,16 @@ Rails.application.routes.draw do
         get :content_post_articles
       end
     end
-    resources :feedbacks do
+    resources :users, only: %i[index destroy] do
       member do
-        get :content_feedback
+        get :profile_user
       end
     end
   end
 
   namespace :api do
     namespace :v1 do
+      resources :addresses
       resources :auth do
         collection do
           post :login
@@ -40,10 +41,19 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :post_articles, only: %i[index show create update destroy]
-      resources :addresses
+      resources :cancers do
+        resources :cancer_stages
+        resources :cancer_risk_factors
+        resources :medical_records do
+          resources :prescriptions
+        end
+        resources :symptoms
+        resources :treatments
+      end
+      resources :documents
       resources :feedbacks, only: %i[create]
       resources :organizations
+      resources :post_articles, only: %i[index show create update destroy]
     end
   end
 end

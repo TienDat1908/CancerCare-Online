@@ -3,11 +3,6 @@
 module Api
   module V1
     class OrganizationsController < ApplicationApiController
-      def index
-        @organization = @current_user.organization
-        render json: @organization
-      end
-
       def create
         @organization = Organization.new(organization_params)
 

@@ -2,7 +2,7 @@
 
 class Prescription < ApplicationRecord
   belongs_to :medical_record
-  belongs_to :user, foreign_key: :prescribed_by # rubocop:disable Rails/InverseOf
+  belongs_to :user, foreign_key: :prescribed_by
 end
 
 # == Schema Information

@@ -3,8 +3,9 @@
 class Cancer < ApplicationRecord
   has_many :cancer_stages, dependent: :destroy
   has_many :medical_records, dependent: :destroy
-  has_and_belongs_to_many :symptoms
-  has_and_belongs_to_many :cancer_risk_factors
+  has_many :symptoms
+  has_many :cancer_risk_factors
+  has_many :treatments
   validates :name, presence: true, uniqueness: true
 end
 
