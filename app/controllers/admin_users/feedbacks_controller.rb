@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 module AdminUsers
-  class FeedbacksController < ApplicationController
-    before_action :authenticate_admin_user!
-    layout 'admin_dashboard'
-
+  class FeedbacksController < BaseController
     def index
       @q = Feedback.ransack(params[:q])
       @feedbacks = @q.result.order(created_at: :desc).page(params[:page]).per(12)

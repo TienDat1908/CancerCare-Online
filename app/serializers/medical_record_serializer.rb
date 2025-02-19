@@ -2,7 +2,6 @@
 
 class MedicalRecordSerializer < ActiveModel::Serializer
   attributes :id,
-             :cancer_id,
              :created_by_user_id,
              :user_id,
              :diagnosis,
@@ -13,5 +12,14 @@ class MedicalRecordSerializer < ActiveModel::Serializer
              :treatment_start_date,
              :treatment_end_date,
              :created_at,
-             :updated_at
+             :updated_at,
+             :images_url
+
+  def images_url
+    return unless object.images.attached?
+
+    object.images.map do |image|
+      Rails.application.routes.url_helpers.url_for(image)
+    end
+  end
 end

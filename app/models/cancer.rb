@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class Cancer < ApplicationRecord
-  has_many :cancer_stages, dependent: :destroy
-  has_many :medical_records, dependent: :destroy
-  has_many :symptoms
-  has_many :cancer_risk_factors
-  has_many :treatments
+  belongs_to :medical_record
   validates :name, presence: true, uniqueness: true
 end
 
@@ -13,13 +9,18 @@ end
 #
 # Table name: cancers
 #
-#  id          :bigint           not null, primary key
-#  description :text
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                :bigint           not null, primary key
+#  description       :text
+#  name              :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  medical_record_id :bigint           not null
 #
 # Indexes
 #
-#  index_cancers_on_name  (name) UNIQUE
+#  index_cancers_on_medical_record_id  (medical_record_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (medical_record_id => medical_records.id)
 #

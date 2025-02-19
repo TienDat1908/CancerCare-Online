@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  # Devise cho AdminUser
+  # Devise for AdminUser
   devise_for :admin_users, skip: %i[registrations passwords confirmations unlocks], controllers: {
     sessions: 'admin_users/sessions'
   }
 
-  # Dashboard cho User
+  # Dashboard for User
   get 'dashboard', to: 'dashboard#index', as: :dashboard
 
-  # Namespace cho admin_users
+  # Namespace for admin_users
   namespace :admin_users do
     resources :dashboard
     resources :feedbacks do
       member do
         get :content_feedback
+      end
+    end
+    resources :medical_records do
+      member do
+        get :content_medical_record
       end
     end
     resources :post_articles do
@@ -29,6 +34,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # Namespace for api
   namespace :api do
     namespace :v1 do
       resources :addresses
@@ -40,13 +46,12 @@ Rails.application.routes.draw do
           patch :update_profile
         end
       end
-
-      resources :cancers do
-        resources :cancer_stages
+      resources :medical_records do
+        resources :cancers
         resources :cancer_risk_factors
-        resources :medical_records do
-          resources :prescriptions
-        end
+        resources :cancer_stages
+        resources :documents
+        resources :prescriptions
         resources :symptoms
         resources :treatments
       end

@@ -3,10 +3,10 @@
 module Api
   module V1
     class TreatmentsController < ApplicationApiController
-      before_action :set_cancer
+      before_action :set_medical_record
 
       def create
-        @treatment = @cancer.treatments.new(treatment_params)
+        @treatment = @medical_record.treatments.new(treatment_params)
 
         if @treatment.save
           render json: @treatment, status: :created
@@ -17,9 +17,9 @@ module Api
 
       private
 
-      def set_cancer
-        @cancer = Cancer.find_by(id: params[:cancer_id])
-        render json: { error: 'Cancer not found' }, status: :not_found unless @cancer
+      def set_medical_record
+        @medical_record = MedicalRecord.find_by(id: params[:medical_record_id])
+        render json: { error: 'Medical Record not found' }, status: :not_found unless @medical_record
       end
 
       def treatment_params

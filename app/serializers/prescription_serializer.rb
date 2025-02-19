@@ -2,6 +2,7 @@
 
 class PrescriptionSerializer < ActiveModel::Serializer
   attributes :id,
+             :prescribed_by,
              :dosage,
              :frequency,
              :instructions,

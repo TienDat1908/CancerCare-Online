@@ -72,31 +72,25 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_18_065759) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "cancer_id"
+    t.bigint "medical_record_id"
   end
 
   create_table "cancer_stages", force: :cascade do |t|
-    t.bigint "cancer_id", null: false
+    t.bigint "medical_record_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cancer_id"], name: "index_cancer_stages_on_cancer_id"
+    t.index ["medical_record_id"], name: "index_cancer_stages_on_medical_record_id"
   end
 
   create_table "cancers", force: :cascade do |t|
+    t.bigint "medical_record_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_cancers_on_name", unique: true
-  end
-
-  create_table "cancers_symptoms", id: false, force: :cascade do |t|
-    t.bigint "cancer_id", null: false
-    t.bigint "symptom_id", null: false
-    t.index ["cancer_id", "symptom_id"], name: "index_cancers_symptoms_on_cancer_id_and_symptom_id"
-    t.index ["symptom_id", "cancer_id"], name: "index_cancers_symptoms_on_symptom_id_and_cancer_id"
+    t.index ["medical_record_id"], name: "index_cancers_on_medical_record_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -121,7 +115,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_18_065759) do
   create_table "medical_records", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "created_by_user_id", null: false
-    t.bigint "cancer_id", null: false
     t.text "diagnosis"
     t.text "treatment"
     t.datetime "created_at", null: false
@@ -131,7 +124,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_18_065759) do
     t.datetime "treatment_end_date"
     t.string "status"
     t.string "notes"
-    t.index ["cancer_id"], name: "index_medical_records_on_cancer_id"
     t.index ["created_by_user_id"], name: "index_medical_records_on_created_by_user_id"
     t.index ["user_id"], name: "index_medical_records_on_user_id"
   end
@@ -176,7 +168,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_18_065759) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "cancer_id"
+    t.bigint "medical_record_id"
   end
 
   create_table "treatments", force: :cascade do |t|
@@ -184,7 +176,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_18_065759) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "cancer_id"
+    t.bigint "medical_record_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -222,10 +214,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_18_065759) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
-  add_foreign_key "cancer_stages", "cancers"
+  add_foreign_key "cancer_stages", "medical_records"
+  add_foreign_key "cancers", "medical_records"
   add_foreign_key "documents", "medical_records"
   add_foreign_key "feedbacks", "users"
-  add_foreign_key "medical_records", "cancers"
   add_foreign_key "medical_records", "users"
   add_foreign_key "medical_records", "users", column: "created_by_user_id"
   add_foreign_key "post_articles", "users"

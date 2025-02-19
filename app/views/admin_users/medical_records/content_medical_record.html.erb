@@ -1,0 +1,71 @@
+<%= link_to admin_users_medical_records_path, class: "flex items-center" do %>
+  <i class="fas fa-arrow-left text-2xl"></i>
+  <div class="text-[40px] font-bold ml-3">
+    No.<%= @medical_record.id %>
+  </div>
+<% end %>
+<div class="bg-white shadow-lg rounded-xl p-6 gap-2">
+  <div class="text-[40px] font-bold text-center secondary-font">
+    Medical Record <%= @medical_record.user.full_name %>
+  </div>
+  <div class="medical-record-diagnosis flex gap-4 mt-4">
+    <div class="border border-solid border-[#727272] rounded-lg p-2 flex-3 break-all">
+      <div class="text-[12px]">Diagnosis:</div>
+      <div class="text-[18px] font-bold">
+        <%= @medical_record.diagnosis %>
+      </div>
+    </div>
+    <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
+      <div class="text-[12px]">Status:</div>
+      <div class="text-[18px] font-bold">
+        <%= @medical_record.status %>
+      </div>
+    </div>
+    <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
+      <div class="text-[12px]">Diagnosis date:</div>
+      <div class="text-[18px] font-bold">
+        <%= @medical_record.diagnosis_date.strftime("%m-%d-%Y, %I:%M %p") %>
+      </div>
+    </div>
+  </div>
+  <div class="medical-record-treatment flex gap-4 mt-4">
+    <div class="border border-solid border-[#727272] rounded-lg p-2 flex-3 break-all">
+      <div class="text-[12px]">Treatment:</div>
+      <div class="text-[18px] font-bold">
+        <%= @medical_record.treatment %>
+      </div>
+    </div>
+    <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
+      <div class="text-[12px]">Treatment start date:</div>
+      <div class="text-[18px] font-bold">
+        <%= @medical_record.treatment_start_date.strftime("%m-%d-%Y, %I:%M %p") %>
+      </div>
+    </div>
+    <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
+      <div class="text-[12px]">Treatment end date: </div>
+      <div class="text-[18px] font-bold">
+        <%= @medical_record.treatment_end_date.strftime("%m-%d-%Y, %I:%M %p") %>
+      </div>
+    </div>
+  </div>
+  <div class="medical-record-notes border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+    <div class="text-[12px]">Note:</div>
+    <div class="text-[18px] font-bold">
+      <%= @medical_record.notes %>
+    </div>
+  </div>
+</div>
+<%# if @medical_record.images.attached? %>
+<!--  <div class="bg-white shadow-lg rounded-xl p-6 mt-5 text-[25px] font-bold">
+    IMAGES:
+    <div class="flex flex-wrap gap-5 mt-2.5">
+      <%# @medical_record.images.each do |image| %>-->
+<!--        <div class="text-center">-->
+          <%#= link_to url_for(image), target: "_blank" do %>
+            <%#= image_tag url_for(image), alt: "Medical Record Image", style: "max-width: 200px; max-height: 200px; border-radius: 10px; cursor: pointer;" %>
+          <%# end %>
+<!--        </div>-->
+      <%# end %>
+<!--    </div>
+  </div>
+<%# end %>-->

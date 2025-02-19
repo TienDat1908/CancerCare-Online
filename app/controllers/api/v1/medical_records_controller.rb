@@ -4,15 +4,14 @@ module Api
   module V1
     class MedicalRecordsController < ApplicationApiController
       def create
-        @cancer = Cancer.find_by(id: params[:cancer_id])
-        @medical_record = @current_user.medical_records.build(medical_record_params)
-        @medical_record.cancer = @cancer
-        @medical_record.created_by_user = @current_user
+        medical_record = @current_user.medical_records.build(medical_record_params)
 
-        if @medical_record.save
-          render json: @medical_record, status: :created
+        medical_record.created_by_user = @current_user
+
+        if medical_record.save
+          render json: medical_record, status: :created
         else
-          render json: @medical_record.errors, status: :unprocessable_entity
+          render json: medical_record.errors, status: :unprocessable_entity
         end
       end
 
@@ -26,7 +25,8 @@ module Api
           :status,
           :treatment,
           :treatment_start_date,
-          :treatment_end_date
+          :treatment_end_date,
+          images: []
         )
       end
     end

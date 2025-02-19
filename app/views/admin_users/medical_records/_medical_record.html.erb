@@ -1,0 +1,12 @@
+<tr data-controller="clickable-row"
+    data-url="<%= content_medical_record_admin_users_medical_record_path(medical_record) %>"
+    data-action="click->clickable-row#handleClick"
+    class="cursor-pointer hover:bg-gray-700 hover:text-white"
+>
+  <td class="w-0"><%= medical_record.id %></td>
+  <td><%= medical_record.diagnosis %></td>
+  <td><%= truncate(medical_record.notes, length: 50, omission: '...') %></td>
+  <td><%= medical_record.status %></td>
+  <td class="w-52"><%= medical_record.created_at.strftime("%m-%d-%Y") %></td>
+  <td class="w-52"><%= medical_record.updated_at.strftime("%m-%d-%Y") %></td>
+</tr>

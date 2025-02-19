@@ -3,13 +3,14 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id,
              :email,
-             :phone_number,
              :first_name,
              :last_name,
              :gender,
+             :phone_number,
              :role,
-             :date_of_diagnosis,
              :specialization,
+             :status,
+             :date_of_diagnosis,
              :created_at,
              :updated_at,
              :avatar_url

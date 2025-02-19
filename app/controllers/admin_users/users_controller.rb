@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 module AdminUsers
-  class UsersController < ApplicationController
-    before_action :authenticate_admin_user!
+  class UsersController < BaseController
     before_action :set_user, only: %i[profile_user destroy]
-    layout 'admin_dashboard'
 
     def index
       @q = User.ransack(params[:q])
