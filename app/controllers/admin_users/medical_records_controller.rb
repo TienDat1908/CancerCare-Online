@@ -12,9 +12,9 @@ module AdminUsers
       @user = @medical_record.user
       @cancers = @medical_record.cancers
       @cancer_stages = @medical_record.cancer_stages
+      @cancer_risk_factors = @medical_record.cancer_risk_factors
       @prescriptions = @medical_record.prescriptions
       @symptoms = @medical_record.symptoms
-      @cancer_risk_factors = @medical_record.cancer_risk_factors
       @treatments = @medical_record.treatments
     end
   end

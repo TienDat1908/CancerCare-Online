@@ -6,7 +6,7 @@ module Api
       before_action :set_medical_record
 
       def create
-        cancer = @medical_record.cancer.new(cancer_params)
+        cancer = @medical_record.cancers.new(cancer_params)
 
         if cancer.save
           render json: cancer, status: :created

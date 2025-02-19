@@ -10,19 +10,19 @@
   </div>
   <div class="medical-record-diagnosis flex gap-4 mt-4">
     <div class="border border-solid border-[#727272] rounded-lg p-2 flex-3 break-all">
-      <div class="text-[12px]">Diagnosis:</div>
+      <div class="text-[12px] text-[#727272]">Diagnosis:</div>
       <div class="text-[18px] font-bold">
         <%= @medical_record.diagnosis %>
       </div>
     </div>
     <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
-      <div class="text-[12px]">Status:</div>
+      <div class="text-[12px] text-[#727272]">Status:</div>
       <div class="text-[18px] font-bold">
         <%= @medical_record.status %>
       </div>
     </div>
     <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
-      <div class="text-[12px]">Diagnosis date:</div>
+      <div class="text-[12px] text-[#727272]">Diagnosis date:</div>
       <div class="text-[18px] font-bold">
         <%= @medical_record.diagnosis_date.strftime("%m-%d-%Y, %I:%M %p") %>
       </div>
@@ -30,42 +30,209 @@
   </div>
   <div class="medical-record-treatment flex gap-4 mt-4">
     <div class="border border-solid border-[#727272] rounded-lg p-2 flex-3 break-all">
-      <div class="text-[12px]">Treatment:</div>
+      <div class="text-[12px] text-[#727272]">Treatment:</div>
       <div class="text-[18px] font-bold">
         <%= @medical_record.treatment %>
       </div>
     </div>
     <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
-      <div class="text-[12px]">Treatment start date:</div>
+      <div class="text-[12px] text-[#727272]">Treatment start date:</div>
       <div class="text-[18px] font-bold">
         <%= @medical_record.treatment_start_date.strftime("%m-%d-%Y, %I:%M %p") %>
       </div>
     </div>
     <div class="border border-solid border-[#727272] rounded-lg p-2 flex-1">
-      <div class="text-[12px]">Treatment end date: </div>
+      <div class="text-[12px] text-[#727272]">Treatment end date: </div>
       <div class="text-[18px] font-bold">
         <%= @medical_record.treatment_end_date.strftime("%m-%d-%Y, %I:%M %p") %>
       </div>
     </div>
   </div>
   <div class="medical-record-notes border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
-    <div class="text-[12px]">Note:</div>
+    <div class="text-[12px] text-[#727272]">Note:</div>
     <div class="text-[18px] font-bold">
       <%= @medical_record.notes %>
     </div>
   </div>
+  <% @cancers.each do |cancer| %>
+    <div class="text-[20px] font-bold secondary-font mt-4">
+      Cancers
+      <span class="text-[25px]"><%= cancer.id %></span>
+      <span class="text-[#F1616E]">*</span>
+    </div>
+    <div class="cancer">
+      <div class="cancer-name border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Cancer Name:</div>
+        <div class="text-[18px] font-bold">
+          <%= cancer.name %>
+        </div>
+      </div>
+      <div class="cancer-description border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Cancer Description:</div>
+        <div class="text-[18px] font-bold">
+          <%= cancer.description %>
+      </div>
+    </div>
+  <% end %>
+  <% @cancer_stages.each do |cancer_stage| %>
+    <div class="text-[20px] font-bold secondary-font mt-4">
+      Cancer Stages
+      <span class="text-[25px]"><%= cancer_stage.id %></span>
+      <span class="text-[#F1616E]">*</span>
+    </div>
+    <div class="cancer-stage">
+      <div class="cancer-stage-name border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Cancer Stage Name:</div>
+        <div class="text-[18px] font-bold">
+          <%= cancer_stage.name %>
+        </div>
+      </div>
+      <div class="cancer-stage-description border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Cancer Stage Description:</div>
+        <div class="text-[18px] font-bold">
+          <%= cancer_stage.description %>
+      </div>
+    </div>
+  <% end %>
+  <% @cancer_risk_factors.each do |cancer_risk_factor| %>
+    <div class="text-[20px] font-bold secondary-font mt-4">
+      Cancer Stage Factors
+      <span class="text-[25px]"><%= cancer_risk_factor.id %></span>
+      <span class="text-[#F1616E]">*</span>
+    </div>
+    <div class="cancer-risk-factors">
+      <div class="cancer-risk-factors-name border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Cancer Risk Factor Name:</div>
+        <div class="text-[18px] font-bold">
+          <%= cancer_risk_factor.name %>
+        </div>
+      </div>
+      <div class="cancer-risk-factors-description border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Cancer Risk Factor Description:</div>
+        <div class="text-[18px] font-bold">
+          <%= cancer_risk_factor.description %>
+      </div>
+    </div>
+  <% end %>
+  <% @symptoms.each do |symptom| %>
+    <div class="text-[20px] font-bold secondary-font mt-4">
+      Symptoms
+      <span class="text-[25px]"><%= symptom.id %></span>
+      <span class="text-[#F1616E]">*</span>
+    </div>
+    <div class="symptoms">
+      <div class="symptoms-name border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Symptom Name:</div>
+        <div class="text-[18px] font-bold">
+          <%= symptom.name %>
+        </div>
+      </div>
+      <div class="symptoms-description border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Symptom Description:</div>
+        <div class="text-[18px] font-bold">
+          <%= symptom.description %>
+      </div>
+    </div>
+  <% end %>
+  <% @treatments.each do |treatment| %>
+    <div class="text-[20px] font-bold secondary-font mt-4">
+      Treatments
+      <span class="text-[25px]"><%= treatment.id %></span>
+      <span class="text-[#F1616E]">*</span>
+    </div>
+    <div class="treatments">
+      <div class="treatments-name border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Treatment Name:</div>
+        <div class="text-[18px] font-bold">
+          <%= treatment.name %>
+        </div>
+      </div>
+      <div class="treatments-description border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Treatment Description:</div>
+        <div class="text-[18px] font-bold">
+          <%= treatment.description %>
+      </div>
+    </div>
+  <% end %>
+  <% @prescriptions.each do |prescription| %>
+    <div class="text-[20px] font-bold secondary-font mt-4">
+      Prescriptions
+      <span class="text-[25px]"><%= prescription.id %></span>
+      <span class="text-[#F1616E]">*</span>
+    </div>
+    <div class="treatments">
+      <div class="prescriptions-medication border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Prescriptions Medication:</div>
+        <div class="text-[18px] font-bold">
+          <%= prescription.medication %>
+        </div>
+      </div>
+      <div class="prescriptions-dosage border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Prescriptions Dosage:</div>
+        <div class="text-[18px] font-bold">
+          <%= prescription.dosage %>
+        </div>
+      </div>
+      <div class="prescriptions-frequency border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Prescriptions Frequency:</div>
+        <div class="text-[18px] font-bold">
+          <%= prescription.frequency %>
+        </div>
+      </div>
+      <div class="prescriptions-instructions border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Prescriptions instructions:</div>
+        <div class="text-[18px] font-bold">
+          <%= prescription.instructions %>
+        </div>
+      </div>
+      <div class="prescriptions-side-effects border border-solid border-[#727272] rounded-lg p-2 break-all mt-4">
+        <div class="text-[12px] text-[#727272]">Prescriptions Side Effects:</div>
+        <div class="text-[18px] font-bold">
+          <%= prescription.side_effects %>
+        </div>
+      </div>
+      <div class="flex gap-4 mt-4">
+        <div class="prescriptions-prescribed-id border border-solid border-[#727272] rounded-lg p-2 break-all">
+          <div class="text-[12px] text-[#727272]">Prescriptions Prescribed Id:</div>
+          <div class="text-[18px] font-bold">
+            <%= prescription.user.full_name %>
+          </div>
+        </div>
+        <div class="prescriptions-is-completed border border-solid border-[#727272] rounded-lg p-2 break-all">
+          <div class="text-[12px] text-[#727272]">Prescriptions Is Completed:</div>
+          <div class="text-[18px] font-bold">
+            <%= prescription.is_completed %>
+          </div>
+        </div>
+        <div class="prescriptions-start-date border border-solid border-[#727272] rounded-lg p-2 break-all">
+          <div class="text-[12px] text-[#727272]">Prescriptions Start Date:</div>
+          <div class="text-[18px] font-bold">
+            <%= prescription.start_date.strftime("%m-%d-%Y, %I:%M %p") %>
+          </div>
+        </div>
+        <div class="prescriptions-end-date border border-solid border-[#727272] rounded-lg p-2 break-all">
+          <div class="text-[12px] text-[#727272]">Prescriptions End Date:</div>
+          <div class="text-[18px] font-bold">
+            <%= prescription.end_date.strftime("%m-%d-%Y, %I:%M %p") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
-<%# if @medical_record.images.attached? %>
-<!--  <div class="bg-white shadow-lg rounded-xl p-6 mt-5 text-[25px] font-bold">
-    IMAGES:
+<% if @medical_record.images.attached? %>
+    <div class="text-[20px] font-bold secondary-font mt-4">
+      Images
+      <span class="text-[#F1616E]">*</span>
+    </div>
     <div class="flex flex-wrap gap-5 mt-2.5">
-      <%# @medical_record.images.each do |image| %>-->
-<!--        <div class="text-center">-->
-          <%#= link_to url_for(image), target: "_blank" do %>
-            <%#= image_tag url_for(image), alt: "Medical Record Image", style: "max-width: 200px; max-height: 200px; border-radius: 10px; cursor: pointer;" %>
-          <%# end %>
-<!--        </div>-->
-      <%# end %>
-<!--    </div>
+      <% @medical_record.images.each do |image| %>
+        <div class="text-center">
+          <%= link_to url_for(image), target: "_blank" do %>
+            <%= image_tag url_for(image), alt: "Medical Record Image", style: "max-width: 200px; max-height: 200px; border-radius: 10px; cursor: pointer;" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<%# end %>-->
+<% end %>
