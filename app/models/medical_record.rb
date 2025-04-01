@@ -23,26 +23,3 @@ class MedicalRecord < ApplicationRecord
     %w[id diagnosis notes status created_at updated_at]
   end
 end
-
-# == Schema Information
-#
-# Table name: medical_records
-#
-#  id                   :integer          not null, primary key
-#  user_id              :integer          not null
-#  created_by_user_id   :integer          not null
-#  diagnosis            :text
-#  treatment            :text
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  diagnosis_date       :datetime
-#  treatment_start_date :datetime
-#  treatment_end_date   :datetime
-#  status               :string
-#  notes                :string
-#
-# Indexes
-#
-#  index_medical_records_on_created_by_user_id  (created_by_user_id)
-#  index_medical_records_on_user_id             (user_id)
-#

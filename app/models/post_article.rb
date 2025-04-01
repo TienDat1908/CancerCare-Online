@@ -15,20 +15,3 @@ class PostArticle < ApplicationRecord
     self.previous_updated_at = updated_at
   end
 end
-
-# == Schema Information
-#
-# Table name: post_articles
-#
-#  id                  :integer          not null, primary key
-#  title               :string
-#  content             :text
-#  user_id             :integer          not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  previous_updated_at :datetime
-#
-# Indexes
-#
-#  index_post_articles_on_user_id  (user_id)
-#
