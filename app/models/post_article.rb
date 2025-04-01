@@ -20,19 +20,15 @@ end
 #
 # Table name: post_articles
 #
-#  id                  :bigint           not null, primary key
-#  content             :text
-#  previous_updated_at :datetime
+#  id                  :integer          not null, primary key
 #  title               :string
+#  content             :text
+#  user_id             :integer          not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  user_id             :bigint           not null
+#  previous_updated_at :datetime
 #
 # Indexes
 #
 #  index_post_articles_on_user_id  (user_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
 #

@@ -9,18 +9,14 @@ end
 #
 # Table name: cancer_stages
 #
-#  id                :bigint           not null, primary key
-#  description       :text
+#  id                :integer          not null, primary key
+#  medical_record_id :integer          not null
 #  name              :string
+#  description       :text
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  medical_record_id :bigint           not null
 #
 # Indexes
 #
 #  index_cancer_stages_on_medical_record_id  (medical_record_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (medical_record_id => medical_records.id)
 #

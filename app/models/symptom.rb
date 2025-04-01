@@ -9,10 +9,10 @@ end
 #
 # Table name: symptoms
 #
-#  id                :bigint           not null, primary key
-#  description       :text
+#  id                :integer          not null, primary key
 #  name              :string
+#  description       :text
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  medical_record_id :bigint
+#  medical_record_id :integer
 #

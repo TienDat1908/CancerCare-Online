@@ -8,9 +8,9 @@ end
 #
 # Table name: organizations
 #
-#  id           :bigint           not null, primary key
-#  address      :string
+#  id           :integer          not null, primary key
 #  name         :string
+#  address      :string
 #  phone_number :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

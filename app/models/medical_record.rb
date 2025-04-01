@@ -28,26 +28,21 @@ end
 #
 # Table name: medical_records
 #
-#  id                   :bigint           not null, primary key
+#  id                   :integer          not null, primary key
+#  user_id              :integer          not null
+#  created_by_user_id   :integer          not null
 #  diagnosis            :text
-#  diagnosis_date       :datetime
-#  notes                :string
-#  status               :string
 #  treatment            :text
-#  treatment_end_date   :datetime
-#  treatment_start_date :datetime
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  created_by_user_id   :bigint           not null
-#  user_id              :bigint           not null
+#  diagnosis_date       :datetime
+#  treatment_start_date :datetime
+#  treatment_end_date   :datetime
+#  status               :string
+#  notes                :string
 #
 # Indexes
 #
 #  index_medical_records_on_created_by_user_id  (created_by_user_id)
 #  index_medical_records_on_user_id             (user_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (created_by_user_id => users.id)
-#  fk_rails_...  (user_id => users.id)
 #
